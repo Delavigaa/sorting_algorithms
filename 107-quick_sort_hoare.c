@@ -1,8 +1,9 @@
+#include "sort.h"
+
 void swap_ints(int *a, int *b);
 int hoare_partition(int *array, size_t size, int start, int end);
 void hoare_sort_recursive(int *array, size_t size, int start, int end); void quick_sort_hoare(int *array, size_t size);
 
-#include "sort.h"
 
 /**
  * swap_ints - In an array, swap two integers..
@@ -11,10 +12,10 @@ void hoare_sort_recursive(int *array, size_t size, int start, int end); void qui
  */
 void swap_ints(int *a, int *b)
 {
-    int tmp;
-    tmp = *a;
-    *a = *b;
-    *b = tmp;
+	int tmp;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
 /**
@@ -32,27 +33,27 @@ void swap_ints(int *a, int *b)
  */
 int hoare_partition(int *array, size_t size, int start, int end)
 {
-    int pivot, idx_above, idx_below;
-    pivot = array[end];
+	int pivot, idx_above, idx_below;
+	pivot = array[end];
 
-    for (idx_above = start - 1, idx_below = end + 1; idx_above < idx_below;)
-    {
-        do {
-            idx_above++;
-        } while (array[idx_above] < pivot);
+	for (idx_above = start - 1, idx_below = end + 1; idx_above < idx_below;)
+	{
+		do {
+			idx_above++;
+		} while (array[idx_above] < pivot);
 
-        do {
-            idx_below--;
-        } while (array[idx_below] > pivot);
+		do {
+			idx_below--;
+		} while (array[idx_below] > pivot);
 
-        if (idx_above < idx_below)
-        {
-            swap_ints(array + idx_above, array + idx_below);
-            print_array(array, size);
-        }
-    }
+		if (idx_above < idx_below)
+		{
+			swap_ints(array + idx_above, array + idx_below);
+			print_array(array, size);
+		}
+	}
 
-    return idx_above;
+	return (idx_above);
 }
 
 /**
@@ -66,14 +67,14 @@ int hoare_partition(int *array, size_t size, int start, int end)
  */
 void hoare_sort_recursive(int *array, size_t size, int start, int end)
 {
-    int part;
+	int part;
 
-    if (end - start > 0)
-    {
-        part = hoare_partition(array, size, start, end);
-        hoare_sort_recursive(array, size, start, part - 1);
-        hoare_sort_recursive(array, size, part, end);
-    }
+	if (end - start > 0)
+	{
+		part = hoare_partition(array, size, start, end);
+		hoare_sort_recursive(array, size, start, part - 1);
+		hoare_sort_recursive(array, size, part, end);
+	}
 }
 
 /**
@@ -87,8 +88,8 @@ void hoare_sort_recursive(int *array, size_t size, int start, int end)
  */
 void quick_sort_hoare(int *array, size_t size)
 {
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    hoare_sort_recursive(array, size, 0, size - 1);
+	hoare_sort_recursive(array, size, 0, size - 1);
 }
