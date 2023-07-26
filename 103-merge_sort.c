@@ -12,25 +12,25 @@
  */
 void merge_subarr(int *subarr, int *buff, size_t front_idx, size_t mid_idx, size_t back_idx)
 {
-    size_t i, j, k = 0;
+	size_t i, j, k = 0;
 
-    printf("Merging...\n[left]: ");
-    print_array(subarr + front_idx, mid_idx - front_idx);
+	printf("Merging...\n[left]: ");
+	print_array(subarr + front_idx, mid_idx - front_idx);
 
-    printf("[right]: ");
-    print_array(subarr + mid_idx, back_idx - mid_idx);
+	printf("[right]: ");
+	print_array(subarr + mid_idx, back_idx - mid_idx);
 
-    for (i = front_idx, j = mid_idx; i < mid_idx && j < back_idx; k++)
-        buff[k] = (subarr[i] < subarr[j]) ? subarr[i++] : subarr[j++];
-    for (; i < mid_idx; i++)
-        buff[k++] = subarr[i];
-    for (; j < back_idx; j++)
-        buff[k++] = subarr[j];
-    for (i = front_idx, k = 0; i < back_idx; i++)
-        subarr[i] = buff[k++];
+	for (i = front_idx, j = mid_idx; i < mid_idx && j < back_idx; k++)
+		buff[k] = (subarr[i] < subarr[j]) ? subarr[i++] : subarr[j++];
+	for (; i < mid_idx; i++)
+		buff[k++] = subarr[i];
+	for (; j < back_idx; j++)
+		buff[k++] = subarr[j];
+	for (i = front_idx, k = 0; i < back_idx; i++)
+		subarr[i] = buff[k++];
 
-    printf("[Done]: ");
-    print_array(subarr + front_idx, back_idx - front_idx);
+	printf("[Done]: ");
+	print_array(subarr + front_idx, back_idx - front_idx);
 }
 
 /**
@@ -44,15 +44,15 @@ void merge_subarr(int *subarr, int *buff, size_t front_idx, size_t mid_idx, size
  */
 void merge_sort_recursive(int *subarr, int *buff, size_t front_idx, size_t back_idx)
 {
-    size_t mid_idx;
+	size_t mid_idx;
 
-    if (back_idx - front_idx > 1)
-    {
-        mid_idx = front_idx + (back_idx - front_idx) / 2;
-        merge_sort_recursive(subarr, buff, front_idx, mid_idx);
-        merge_sort_recursive(subarr, buff, mid_idx, back_idx);
-        merge_subarr(subarr, buff, front_idx, mid_idx, back_idx);
-    }
+	if (back_idx - front_idx > 1)
+	{
+		mid_idx = front_idx + (back_idx - front_idx) / 2;
+		merge_sort_recursive(subarr, buff, front_idx, mid_idx);
+		merge_sort_recursive(subarr, buff, mid_idx, back_idx);
+		merge_subarr(subarr, buff, front_idx, mid_idx, back_idx);
+	}
 }
 
 /**
@@ -65,16 +65,16 @@ void merge_sort_recursive(int *subarr, int *buff, size_t front_idx, size_t back_
  */
 void merge_sort(int *array, size_t size)
 {
-    int *buff;
+	int *buff;
 
-    if (array == NULL || size < 2)
-        return;
+	if (array == NULL || size < 2)
+		return;
 
-    buff = malloc(sizeof(int) * size);
-    if (buff == NULL)
-        return;
+	buff = malloc(sizeof(int) * size);
+	if (buff == NULL)
+		return;
 
-    merge_sort_recursive(array, buff, 0, size);
+	merge_sort_recursive(array, buff, 0, size);
 
-    free(buff);
+	free(buff);
 }
